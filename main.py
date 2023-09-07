@@ -1,6 +1,13 @@
 import pyfiglet, sys, os, platform, re
 from colorama import Fore as color
 
+# checks the OS and runs a diffrent clear command if it's windows
+if platform.system == "Windows":
+  os.system("cls")
+else:
+  #clears the terminal
+  os.system("clear")
+
 # basic intro function for the program
 def intro(txt, author, url):
   intro = color.GREEN + pyfiglet.figlet_format(txt)
@@ -28,7 +35,7 @@ def binaryToDecimal(n):
     decVal += placeVal * int(digits[len(digits) - i - 1])
     print(color.LIGHTCYAN_EX + "Ans: " + color.GREEN + str(decVal))
     placeVal *= 2
-    print(color.GREEN + str(placeVal))
+    print(color.LIGHTCYAN_EX + "" + color.GREEN + str(placeVal) + color.RESET)
   return decVal
 
 # decimal to binary convert function
@@ -38,13 +45,16 @@ def decimalToBinary(n):
     return "Input must be a decimal number string [0-9]"
   if (int(n) <= 1):
     return n
+  # creates an empty string
   binVal = ''
+  # sets decRem to n as an integer
   decRem = int(n)
+  # while decRem is greater than 0 
   while decRem > 0:
     binVal = str(decRem % 2) + binVal
     print(color.LIGHTCYAN_EX + "Remainder: " + color.GREEN + str(binVal) + color.RESET)
     decRem = decRem // 2
-    print(color.GREEN + str(decRem))
+    print(color.LIGHTCYAN_EX + "" + color.GREEN + str(decRem) + color.RESET)
   return binVal
 
 prompt = input(color.LIGHTCYAN_EX + "\n1. Binary to Decimal\n2. Decimal to Binary\n3. Close\n: " + color.RESET)
@@ -61,7 +71,6 @@ if prompt == "1":
   bin = conv
   dec = binaryToDecimal(conv)
   # prints the output from the decimal to binary conversion
-  #print(color.LIGHTCYAN_EX + "Original Binary number: " + color.GREEN + bin + color.LIGHTCYAN_EX + " Decimal: " + color.GREEN + str(dec) + color.RESET)
   print(color.LIGHTCYAN_EX + "Original Binary: " + color.GREEN + bin + color.LIGHTCYAN_EX + "\nSolution: " + color.GREEN + str(dec) + color.RESET)
 
 # converts the inputed decimal into binary and prints the output
@@ -76,7 +85,6 @@ if prompt == "2":
   dec = conv
   bin = decimalToBinary(conv)
   # prints the output from the decimal to binary conversion
-  #print(color.LIGHTCYAN_EX + "Original Decimal number: " + color.GREEN + dec + color.LIGHTCYAN_EX + " Binary: " + color.GREEN + str(bin) + color.RESET)
   print(color.LIGHTCYAN_EX + "Original Decimal: " + color.GREEN + dec + color.LIGHTCYAN_EX + "\nSolution: " + color.GREEN + str(bin) + color.RESET)
 
 # Exits the program.
