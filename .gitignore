@@ -4,3 +4,5 @@
 *pyproject.toml
 *venv
 *.config
+*other.py
+*rick.jpg
