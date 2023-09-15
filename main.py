@@ -104,6 +104,6 @@ if prompt == "3":
   sys.exit(color.RED + "Closing Program" + color.RESET)
 
 # checks if the "prompt" variable is greater than 3 and if it is closes the program.
-if prompt == int(prompt)>3:
+if int(prompt) == int(prompt)>3:
   sys.exit(color.RED + "Please restart the program and choose a valid option [1-3]" + color.RESET)
 
