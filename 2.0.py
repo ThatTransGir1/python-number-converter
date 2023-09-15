@@ -19,18 +19,9 @@ intro("Converter", "ThatTransGir1", "https://github.com/thattransgir1")
 #* dictionary of decimal to binary converted numbers
 hexListD = {0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8', 9: '9', 10: 'A', 11: 'B', 12: 'C', 13: 'D', 14: 'E', 15: 'F'}
 hexListH = {'0': 0, '1' : 1, '2' : 2, '3' : 3, '4' : 4, '5' : 5, '6' : 6, '7' : 7, '8' : 8, '9' : 9, 'A' : 10 , 'B' : 11, 'C' : 12, 'D' : 13, 'E' : 14, 'F' : 15}
-# checks if inputed number is a valid base (10 or 2 for this converter)
-#def baseCheck(num_string, base):
-#    for single_char in num_string:
-#        if int(single_char) >= int(base):
-#            return False
-#    return True
 
 #* binary to decimal convert function
 def binaryToDecimal(n):
-  #* checks if the inputed string is valid binary
-#  if baseCheck(n,2) == False:
-#    return sys.exit(print(color.RED + "Input must be a binary number string [0-1]"))
   #* creates an empty list 'digits'
   digits = []
   #* sets the 'placeVal' variable to 1
@@ -51,9 +42,6 @@ def binaryToDecimal(n):
 
 #* decimal to binary convert function
 def decimalToBinary(n):
-  # checks if the inputed string is a valid decimal number
-#  if baseCheck(n,10) == False:
-#    return sys.exit(print(color.RED + "Input must be a decimal number string [0-9]"))
   if (int(n) <= 1):
     return n
   #* creates an empty string
@@ -72,18 +60,15 @@ def decimalToBinary(n):
     print(color.LIGHTCYAN_EX + "Quotient: " + color.GREEN + str(decRem) + color.RESET+ "\n")
   return binVal
 
-# hexadecimal to binary convert function
+# hexadecimal to decimal convert function
 def hexadecimalToDecimal(n):
-  # checks if the inputed string is a valid hexadecimal number
-  #if baseCheck(n,16) == False:
-  #  return sys.exit("Input must be a hexadecimal number string [0-F]"))
   decimal = 0
   length = len(n)-1
   for digit in n:
     decimal += hexListH[digit]*16**length
     length -= 1
   return decimal
-
+#* decimal to hexadecimal convert function
 def decimalToHexadecimal(n):
     hexadecimal = ''
     while(n > 0):
@@ -92,8 +77,14 @@ def decimalToHexadecimal(n):
         n = n // 16
     return hexadecimal
 
+#* restart prompt
+def restart():
+  p = input(color.LIGHTCYAN_EX + "Restart the Program?" + color.LIGHTRED_EX + " [Y/N]\n: ")
+  if p == "y" or p == "Y":
+    os.system("python3 2.0.py")
+
 #* the begining prompt
-prompt = input(color.LIGHTRED_EX + "\nType a number corrasponding to an option below [1-7]." + color.LIGHTCYAN_EX + "\n\n1. Binary to Decimal\n2. Decimal to Binary\n3. Hexadecimal to Decimal\n4. Decimal to Hexadecimal\n5. Binary to Hexadecimal\n6. Hexadecimal to Binary\n7. Close\n: " + color.RESET)
+prompt = input(color.LIGHTRED_EX + "\nType a number corrasponding to an option below" + color.LIGHTRED_EX + " [1-7]." + color.LIGHTCYAN_EX + "\n\n1. Binary to Decimal\n2. Decimal to Binary\n3. Hexadecimal to Decimal\n4. Decimal to Hexadecimal\n5. Binary to Hexadecimal\n6. Hexadecimal to Binary\n7. Close\n: " + color.RESET)
 
 #* converts the inputed binary into decimal and prints the output
 if prompt == "1":
@@ -108,6 +99,7 @@ if prompt == "1":
   Dec = binaryToDecimal(conv)
   #* prints the output from the decimal to binary conversion
   print(color.LIGHTCYAN_EX + "Original Binary: " + color.GREEN + Bin + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Dec) + color.RESET)
+  restart()
 
 # converts the inputed decimal into binary and prints the output
 if prompt == "2":
@@ -122,6 +114,7 @@ if prompt == "2":
   Bin = decimalToBinary(conv)
   #* prints the output from the decimal to binary conversion
   print(color.LIGHTCYAN_EX + "Original Decimal: " + color.GREEN + Dec + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Bin) + color.RESET)
+  restart()
 
 #* converts inputed hexadecimal into decimal and prints the output
 if prompt == "3":
@@ -132,6 +125,7 @@ if prompt == "3":
   Hex = conv
   Dec = hexadecimalToDecimal(conv)
   print(color.LIGHTCYAN_EX + "Original Hexadecimal: " + color.GREEN + Hex + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Dec) + color.RESET)
+  restart()
 
 #* converts inputed decimal into hexadecimal and prints the output
 if prompt == "4":
@@ -142,6 +136,7 @@ if prompt == "4":
   Dec = conv
   Hex = decimalToHexadecimal(int(conv))
   print(color.LIGHTCYAN_EX + "Original Hexadecimal: " + color.GREEN + Dec + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Hex) + color.RESET)
+  restart()
 
 #* converts the inputed binary into hexadecimal
 if prompt == "5":
@@ -153,23 +148,24 @@ if prompt == "5":
   Dec = binaryToDecimal(conv)
   Hex = decimalToHexadecimal(int(Dec))
   print(color.LIGHTCYAN_EX + "Original Binary: " + color.GREEN + Bin + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Hex) + color.RESET)
+  restart()
 
 #* converts the inputed binary into hexadecimal
 if prompt == "6":
   if platform.system == "Windows":
     os.system("cls")
   os.system("clear")
-  conv = input(color.MAGENTA + "Enter the Binary number you would like to convert below\n: " + color.RESET)
-  Bin = conv
-  Dec = binaryToDecimal(conv)
-  Hex = decimalToHexadecimal(Dec)
-  
-  print(color.LIGHTCYAN_EX + "Original Binary: " + color.GREEN + Bin + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Hex) + color.RESET)
+  conv = input(color.MAGENTA + "Enter the Hexadecimal number you would like to convert below\n: " + color.RESET)
+  Hex = conv
+  Dec = hexadecimalToDecimal(conv)
+  Bin = decimalToBinary(Dec)
+  print(color.LIGHTCYAN_EX + "Original Binary: " + color.GREEN + Hex + color.LIGHTCYAN_EX + "\nSolution: " + color.LIGHTGREEN_EX + str(Bin) + color.RESET)
+  restart()
 
 #* Exits the program.
 if prompt == "7":
   sys.exit(color.RED + print("Closing Program") + color.RESET)
 
 #* checks if the "prompt" variable is greater than 3 and if it is closes the program.
-if prompt == int(prompt)>7:
-  sys.exit(color.RED + print("Please restart the program and choose a valid option [1-7]") + color.RESET)
+if int(prompt) == int(prompt)>7:
+  sys.exit(print(color.RED + "Please restart the program and choose a valid option " + color.LIGHTGREEN_EX + "[1-7]"+ color.RESET))
